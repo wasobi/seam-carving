@@ -22,7 +22,8 @@ class ResizeableImage(imagematrix.ImageMatrix):
     	
     """
     Calculate the lowest energy seam dynamically
-    -- find the lowest adjacent energy, then add the to the total energy within the vertical seam
+    -- find the lowest adjacent energy, then add the to the total 
+    energy within the vertical seam
     -- takes an image map
     """
     def dynamic (_e_seam):
@@ -35,7 +36,7 @@ class ResizeableImage(imagematrix.ImageMatrix):
     
     inf = math.inf
     # _e_seam[i][j] is the energy of a given pixel
-    		# energy of the pixels on the edge of the image will always be 10000
+    	# energy of the pixels on the edge of the image will always be 10000
     	for i in range (self.height):
     		if i == 0:
     			i = 1 #skip the first row
@@ -43,13 +44,21 @@ class ResizeableImage(imagematrix.ImageMatrix):
     		# calculate the energy seam at the current pixel
     		# right edge
     		if j == 0 or j == self.width - 1:
-    			_e_seam[i][j] = min(inf,_e_seam[i-1][j],_e_seam[i-1][j+1]) + _e_seam[i][j]
+    			_e_seam[i][j] = _e_seam[i][j] + min(inf,_e_seam[i-1][j],_e_seam[i-1][j+1])
     		# left edge
     		elif j == self.width - 1:
-    			_e_seam[i][j] = min(_e_seam[i-1][j-1],_e_seam[i-1][j],inf) + _e_seam[i][j]
+    			_e_seam[i][j] = _e_seam[i][j] + min(_e_seam[i-1][j-1],_e_seam[i-1][j],inf)
     		else:
-    			_e_seam[i][j] = min(_e_seam[i-1][j-2],_e_seam[i-1][j],_e_seam[i-1][j+1]) + _e_seam[i][j]
+    			_e_seam[i][j] = _e_seam[i][j] + min(_e_seam[i-1][j-2],_e_seam[i-1][j],_e_seam[i-1][j+1])
     
+    
+    """
+    Calculate the lowest energy recursively
+    """
+    def _naive (pixel, energy)
+    
+    
+    return
     
     """
     Create the image gradient by calculating the energy of each pixel
