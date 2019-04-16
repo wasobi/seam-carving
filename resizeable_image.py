@@ -9,9 +9,10 @@ class ResizeableImage(imagematrix.ImageMatrix):
     def best_seam(self, dp=True):
     	gradient = _gradient(self)
     	if dp=True:
-    		best = dynamic(gradient)
+    		# compute the best seam dynamically (loops)
+    		dynamic(gradient)
     	else:
-    		# compute the best seam using the naive algorithm
+    		# compute the best seam using the naive algorithm (recursion)
     		naive(0,0, energy)  
     	
 	"""
@@ -40,7 +41,7 @@ class ResizeableImage(imagematrix.ImageMatrix):
     		# energy of the pixels on the edge of the image will always be 10000
     	for i in range (self.height):
     		if i == 0:
-    			i = 1 #skip the first row
+    			i = self.height-1 #skip the first row
     		for j in range (self.width):
     		# calculate the energy seam at the current pixel
     		# right edge
@@ -60,9 +61,10 @@ class ResizeableImage(imagematrix.ImageMatrix):
     			min_seam = map[self.height-1][j+1]
     			
     	# follow the path along the lowest energy seam
-    	for i range(self.height):
-    		
-    	
+    		for i range(self.height):
+    			
+    			
+    	return gradient[self.height-1].index(min_seam)
     
     """
     Calculate the lowest energy recursively
@@ -87,8 +89,7 @@ class ResizeableImage(imagematrix.ImageMatrix):
     	for i in range (self.height):
     		for j in range (self.width):
     			# calculate the energy of a pixel
-    			gradient[i][j] = energy(self,i,j)
-    			
+    			gradient[i][j] = self.energy(i,j)
     	# return the gradient of the image
     	return gradient
     	
