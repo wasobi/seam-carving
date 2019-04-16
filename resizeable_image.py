@@ -44,12 +44,12 @@ class ResizeableImage(imagematrix.ImageMatrix):
     		# calculate the energy seam at the current pixel
     		# right edge
     		if j == 0 or j == self.width - 1:
-    			_e_seam[i][j] = min(inf,_e_seam[i-1][j],_e_seam[i-1][j+1]) + _e_seam[i][j]
+    			_e_seam[i][j] = _e_seam[i][j] + min(inf,_e_seam[i-1][j],_e_seam[i-1][j+1])
     		# left edge
     		elif j == self.width - 1:
-    			_e_seam[i][j] = min(_e_seam[i-1][j-1],_e_seam[i-1][j],inf) + _e_seam[i][j]
+    			_e_seam[i][j] = _e_seam[i][j] + min(_e_seam[i-1][j-1],_e_seam[i-1][j],inf)
     		else:
-    			_e_seam[i][j] = min(_e_seam[i-1][j-2],_e_seam[i-1][j],_e_seam[i-1][j+1]) + _e_seam[i][j]
+    			_e_seam[i][j] = _e_seam[i][j] + min(_e_seam[i-1][j-2],_e_seam[i-1][j],_e_seam[i-1][j+1])
     
     
     """
