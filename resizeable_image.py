@@ -52,6 +52,14 @@ class ResizeableImage(imagematrix.ImageMatrix):
     
     
     """
+    Calculate the lowest energy recursively
+    """
+    def _naive (pixel, energy)
+    
+    
+    return
+    
+    """
     Create the image gradient by calculating the energy of each pixel
     Return the image as a 2 x 2 array
     """
