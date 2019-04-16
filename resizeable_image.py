@@ -25,11 +25,11 @@ class ResizeableImage(imagematrix.ImageMatrix):
     		for j in range (self.width):
     		#calculate the energy seam at the current pixel
     		if j == 0:
-    			_e_seam = min(inf,j,j+1)
+    			_e_seam[i][j] = min(inf,j,j+1)
     		elif j == self.width - 1:
-    			_e_seam = min(j-1,j,inf)
+    			_e_seam[i][j] = min(j-1,j,inf)
     		else:
-    			_e_seam = min(j-1,j,j+1)
+    			_e_seam[i][j] = min(j-1,j,j+1)
     		
     		# compute gradient at every pixel
     		# create energy map
