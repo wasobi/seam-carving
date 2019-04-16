@@ -1,1 +1,3 @@
-# seam carving for smart image resizing
+# Seam Carving
+
+Content-aware algorithm for image resizing. 
