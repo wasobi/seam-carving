@@ -69,7 +69,8 @@ class ResizeableImage(imagematrix.ImageMatrix):
     """
     Calculate the lowest energy recursively
     """
-    def naive (i,j, energy)
+    def naive (gradient, i, j)
+    	# depth first search on the gradient
     	# if left edge
     	# if right edge
     	# if last row
