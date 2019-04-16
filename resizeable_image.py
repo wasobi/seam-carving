@@ -22,7 +22,8 @@ class ResizeableImage(imagematrix.ImageMatrix):
     	
     """
     Calculate the lowest energy seam dynamically
-    -- find the lowest adjacent energy, then add the to the total energy within the vertical seam
+    -- find the lowest adjacent energy, then add the to the total 
+    energy within the vertical seam
     -- takes an image map
     """
     def dynamic (_e_seam):
@@ -35,7 +36,7 @@ class ResizeableImage(imagematrix.ImageMatrix):
     
     inf = math.inf
     # _e_seam[i][j] is the energy of a given pixel
-    		# energy of the pixels on the edge of the image will always be 10000
+    	# energy of the pixels on the edge of the image will always be 10000
     	for i in range (self.height):
     		if i == 0:
     			i = 1 #skip the first row
