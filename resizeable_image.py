@@ -27,11 +27,13 @@ class ResizeableImage(imagematrix.ImageMatrix):
     """
     def dynamic (_e_seam):
     # TO-DO
-    # compute gradient at every pixel
-    # identify the lowest energy seam
-    	# sum of all of the energies along a path
-    	# find the smallest sum at the end of the path
-    	# retrace that path back to the first pixel in the path	
+    # [ ]compute gradient at every pixel
+    # [x]identify the lowest energy seam
+    	# [x]sum of all of the energies along a path
+    	# [x]find the smallest sum at the end of the path
+    # [x]retrace that path back to the first pixel in the path
+    	# [x]find the first pixel of the min seam
+    	# [ ]retrace path
     
     inf = math.inf
     # _e_seam[i][j] is the energy of a given pixel
@@ -49,6 +51,13 @@ class ResizeableImage(imagematrix.ImageMatrix):
     			_e_seam[i][j] = min(_e_seam[i-1][j-1],_e_seam[i-1][j],inf) + _e_seam[i][j]
     		else:
     			_e_seam[i][j] = min(_e_seam[i-1][j-2],_e_seam[i-1][j],_e_seam[i-1][j+1]) + _e_seam[i][j]
+    
+    	# locate the start of the lowest energy seam
+        while pixel < self.width:
+    		if _e_seam[pixel][self.height-1] < _e_seam[pixel+1][self.height-1]:
+    			min_seam = _e_seam[pixel][self.height-1]
+    		else:
+    			min_seam = _e_seam[pixel+1][self.height-1]
     
     
     """
