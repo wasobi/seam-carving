@@ -1,19 +1,22 @@
 import imagematrix
 from array import *
 import math
+import numpy as np
 
 class ResizeableImage(imagematrix.ImageMatrix):
 	"""
 	Find the best seam
 	"""
 	def best_seam(self, dp=True):
-		gradient = _gradient(self)
+		# initialize an energy map (filled with zeros)
+		gradient = np.zeros((self.width,self.height),dtype = np.int)
 		if dp == True:
 			# compute the best seam dynamically (loops)
-			dynamic(self,gradient)
+			seam = dynamic(self,gradient)
 		else:
 			# compute the best seam using the naive algorithm (recursion)
-			naive(self,gradient)
+			seam = naive(self,gradient)
+		return 
 	"""
 	Remove the lowest energy seam from the image
 	"""
@@ -56,11 +59,12 @@ class ResizeableImage(imagematrix.ImageMatrix):
 			else:
 				min_seam = map[self.height-1][j+1]
 		seam = _get_path(self,map)
-    	return seam
+		return seam
+
 	"""
 	Calculate the lowest energy recursively
     """
-	def naive (self,map)
+	def naive (self,map):
 	# depth first search on the gradient
 	# if left edge
 	# if right edge
@@ -75,14 +79,11 @@ class ResizeableImage(imagematrix.ImageMatrix):
 	Create the image gradient by calculating the energy of each pixel
 	Return the image as a 2 x 2 array
 	"""
-    def _gradient (self):
-		# initialize an energy map (filled with zeros)
-		gradient = np.zeros((self.width,self.height),dtype = np.int)
+	def _gradient (self,map):
 		for i in range (self.height):
 			for j in range (self.width):
 				# calculate the energy of a pixel
 				gradient[i][j] = self.energy(i,j)
-		# return the gradient of the image
 		return gradient
 
 	"""
@@ -91,8 +92,8 @@ class ResizeableImage(imagematrix.ImageMatrix):
 	def _get_path (self,map):
 		lowest_seam = []
 		# follow the path along the lowest energy seam
-		for i range(self.height):
-			##
+		for i in range (self.height):
+			j = 0
 		return path
 	"""
 	Simple implementation of depth first search
