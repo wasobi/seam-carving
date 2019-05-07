@@ -10,13 +10,14 @@ class ResizeableImage(imagematrix.ImageMatrix):
 	def best_seam(self, dp=True):
 		# initialize an energy map (filled with zeros)
 		gradient = np.zeros((self.width,self.height),dtype = np.int)
+		seam = []
 		if dp == True:
 			# compute the best seam dynamically (loops)
 			seam = dynamic(self,gradient)
 		else:
 			# compute the best seam using the naive algorithm (recursion)
 			seam = naive(self,gradient)
-		return 
+		return seam
 	"""
 	Remove the lowest energy seam from the image
 	"""
@@ -46,19 +47,18 @@ class ResizeableImage(imagematrix.ImageMatrix):
 				# calculate the energy seam at the current pixel
 				# right edge
 				if j == 0:
-					map[i][j] = _min(inf,map[i-1][j],map[i-1][j+1]) + map[i][j]
+					map[i][j] = min(inf,map[i-1][j],map[i-1][j+1]) + map[i][j]
 					# left edge
 				elif j == self.width - 1:
-					map[i][j] = _min(map[i-1][j-1],map[i-1][j],inf) + map[i][j]
+					map[i][j] = min(map[i-1][j-1],map[i-1][j],inf) + map[i][j]
 				else:
-					map[i][j] = _min(map[i-1][j-2],map[i-1][j],map[i-1][j+1]) + map[i][j]
-		# locate the start of the lowest energy seam
-		for j in range(self.width):
-			if map[self.height-1][j] < map[self.height-1][j+1]:
-				min_seam = map[self.height-1][j]
-			else:
-				min_seam = map[self.height-1][j+1]
-		seam = _get_path(self,map)
+					map[i][j] = min(map[i-1][j-2],map[i-1][j],map[i-1][j+1]) + map[i][j]
+		# find start of the lowest energy seam in last row
+		min(map[self.height-1])
+		for i in range (self.height):
+			for j in range (self.width):
+				# calculate the energy of a pixel
+				gradient[i][j] = self.energy(i,j)
 		return seam
 
 	"""
